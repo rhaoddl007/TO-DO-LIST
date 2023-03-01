@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+<link rel="stylesheet" href="./css/index.css">
+<script src="https://kit.fontawesome.com/1c5aeb124c.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div id="wrap">
+        <div id="display">
+            <ul></ul>
+        </div>
+        <div>
+            <input id="inputText" type="text" placeholder="해야 할 일을 추가해보자!" maxlength="12">
+            <button id="btn">+</button>
+        </div>
+    </div>
+
+    <script>
+
+        let btn = document.querySelector("#btn");
+        let display = document.querySelector("#display");
+        let elUl = document.querySelector('ul');
+
+        function createListElement(inputText) {
+            let list = document.createElement("li");
+            let listText = document.createTextNode(inputText);
+
+            let listBtn = document.createElement('button');
+            // let Btnname = document.createTextNode("삭제");
+            list.classList.add('item');
+            listBtn.classList.add('removeList','fa-solid', 'fa-trash');
+            // listBtn.appendChild(Btnname);
+            list.appendChild(listText);
+            list.appendChild(listBtn);
+            elUl.appendChild(list);
+
+            let removeBtns = document.querySelectorAll('.removeList');
+            removeBtns.forEach(function (a, i) {
+                a.addEventListener('click', function (e) {
+                    let item = e.target.parentNode;
+                    item.remove();
+                });
+            });
+
+
+
+        }
+        btn.addEventListener("click", function () {
+            let inputText = document.querySelector("#inputText").value;
+            if (inputText == '') {
+                alert('입력하세요');
+            } else {
+                createListElement(inputText);
+                document.querySelector('#inputText').value = "";
+            }
+        });
+
+        inputText.addEventListener("keyup", function (e) {
+            let inputText = document.querySelector("#inputText").value;
+
+            if (e.keyCode === 13) {
+                if (inputText == '') {
+                    alert('입력하세요');
+                } else {
+                    createListElement(inputText);
+                    document.querySelector('#inputText').value = "";
+                }
+            }
+        });
+
+
+
+    </script>
+</body>
+</html>
